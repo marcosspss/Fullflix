@@ -1,30 +1,31 @@
 import { Link } from "react-router-dom";
 import Footer from "../../Components/Footer/footer";
-import { useEffect, useState } from "react";
-import { getList } from "../../API/API";
+import { Grid, MainContainer, RightSide, } from "./Detail.style";
+import { Header } from "../../Components/Header/Header";
+import { useSelector } from "react-redux";
+
 
 
 export function Detail() {
-    const [list, setList] = useState([])
+    const state = useSelector((state) => state.Fullflix.movie)
 
-
-    useEffect(() => {
-        getList(setList)
-    }, [])
-
-    let movie = list[0]
-
+   
    return (
-        <div>          
-           <h1>{movie.title}</h1>
-            <p>{movie.overview}</p>
-            <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} width={"300px"} />
-
-            <Link to={"/"}>
-                <button style={{ height: "2vh", width: "2vw" }} title="Home"></button>
-            </Link>
+        <MainContainer>
+            <Header/>
+            <Grid>
+            <img src={`https://image.tmdb.org/t/p/w500${state.poster_path}`} alt={state.title} width={"300px"} />
+            <RightSide>
+                <p>Titulo: {state.title}</p>
+                <p>Sinopse: {state.overview}</p>
+                <p>Data de Lançamento:{state.release_date}</p>
+                <p>Nota:{state.vote_average}</p>
+                <Link to={"/"}>Voltar para a Home</Link>
+            </RightSide>
+            </Grid>        
             <Footer title={"Detail"} />
-        </div>
-    )
+        </MainContainer>
+    );
 }
 
+export default Detail

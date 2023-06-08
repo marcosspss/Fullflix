@@ -9,3 +9,13 @@ export const getList = (setState) =>{
     })
 }
 
+
+    export const getDetail = (id,setState) =>{
+        console.log(id)
+        axios.get(`https://api.themoviedb.org/3/movie/${id}?api_key=e63d70bb597d9acea42110edad3dea89&language=pt-BR`)
+        .then((response)=>{
+            setState(response.data)
+        }).catch((error)=>{
+            console.log(error)
+        })
+    }
