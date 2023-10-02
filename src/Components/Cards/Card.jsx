@@ -13,7 +13,7 @@ export const Card = ({ movie }) =>{
     }
 
     useEffect(() => {
-        dispath(getMovieInfo(movieDetail))}, [movieDetail])
+        dispath(getMovieInfo(movieDetail))}, [dispath,movieDetail])
 
     return (
         <MainContainer to={"Detail"} id={movie.id} onMouseEnter={onHoverDetail}>
